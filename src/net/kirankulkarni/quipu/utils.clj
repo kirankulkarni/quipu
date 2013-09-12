@@ -21,3 +21,11 @@
   [o]
   (bit-and (long (murmurhash-32 o))
            (long 0xFFFFFFFF)))
+
+
+;;; y = y_0 + ((y_1-y_0) * ({x - x_0}/{x_1-x_0}))
+(defn lerp
+  "Implements linear interpolation"
+  [x0 y0 x1 y1 x]
+  (long (Math/ceil
+         (+ y0 (* (- y1 y0) (/ (- x x0) (- x1 x0)))))))
