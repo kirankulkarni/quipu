@@ -12,7 +12,7 @@
 ;; Kyu-Young Whang , Brad T. Vander-Zanden , Howard M. Taylor, A linear-time probabilistic counting algorithm for database applications, ACM Transactions on Database Systems (TODS), v.15 n.2, p.208-229, June 1990
 ;;; http://dl.acm.org/citation.cfm?id=78925&CFID=359353900&CFTOKEN=83197792
 
-(declare calculate-cardinality)
+(declare calculate-cardinality get-bit-pos)
 
 
 ;;; This type implements Linear Counting backed by memory.
@@ -29,14 +29,18 @@
     [^:unsynchronized-mutable ^java.util.BitSet bitset n m]
   IProbCountingSet
   (add [this elem]
-    (let [hash-code (qu/unsigned-murmurhash-32 elem)
-          bit-pos (int (mod hash-code (long m)))]
-      (.set bitset bit-pos)
-      true))
+    (.set bitset (get-bit-pos m elem))
+    true)
   (get-card [this] (calculate-cardinality m
                                           (.cardinality bitset)))
   (clear [this] (.clear bitset))
   (size [this] (long (/ m 8))))
+
+
+(defn get-bit-pos
+  [m elem]
+  (let [hash-code (qu/unsigned-murmurhash-32 elem)]
+    (int (mod hash-code (long m)))))
 
 
 (defn calculate-cardinality
