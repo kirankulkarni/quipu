@@ -3,7 +3,8 @@
   net.kirankulkarni.quipu.linear
   (:require [net.kirankulkarni.quipu.protocols
              :refer [to-byte-array IProbCountingSet]]
-            [net.kirankulkarni.quipu.utils :as qu]))
+            [net.kirankulkarni.quipu.utils :as qu])
+  (:import [java.util BitSet]))
 
 ;;; Implements: Linear-time probabilistic counting algorithm
 
@@ -127,3 +128,14 @@
             y0 (get predefind-map-sizes x0)
             y1 (get predefind-map-sizes x1)]
         (qu/lerp x0 y0 x1 y1 n))))
+
+
+(defn get-mem-linear-counter
+  "Returns a Memory backed Linear counter.
+   You should provide true-cardinality.
+   If you do not know true cardinality
+    then provide total number of elements (including duplicates)"
+  [n]
+  (let [m (calculate-m n)
+        bitset (BitSet. (int m))]
+    (LinearCounter. bitset n m)))
