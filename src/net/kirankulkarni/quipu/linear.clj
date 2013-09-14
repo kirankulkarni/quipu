@@ -146,3 +146,18 @@
   (let [m (calculate-m n)
         bitset (BitSet. (int m))]
     (LinearCounter. bitset n m)))
+
+
+(defn merge-mem-counters
+  "Count is identified by cardinality of bitset.
+   Algorithm already handles collisions hence we can just merge counters using bitwise-or"
+  [& counters]
+  {:pre [(every? #(instance? LinearCounter %) counters)
+         (apply = (mapv #(.m %) counters))]}
+  (let [first-count ^LinearCounter (first counters)
+        result-bitset (.clone ^BitSet (get-bitset (first counters)))]
+    (dorun (mapv #(.or result-bitset ^BitSet (get-bitset %))
+                 (rest counters)))
+    (LinearCounter. result-bitset
+                    (.n first-count)
+                    (.m first-count))))
