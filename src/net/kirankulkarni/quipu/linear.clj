@@ -2,7 +2,9 @@
       :author "Kiran Kulkarni <kk.questworld@gmail.com>"}
   net.kirankulkarni.quipu.linear
   (:require [net.kirankulkarni.quipu.protocols
-             :refer [to-byte-array IProbCountingSet]]
+             :refer [to-byte-array]]
+            [net.kirankulkarni.quipu.core
+             :refer :all]
             [net.kirankulkarni.quipu.utils :as qu])
   (:import [java.util BitSet]))
 
@@ -34,7 +36,8 @@
   (get-card [this] (calculate-cardinality m
                                           (.cardinality bitset)))
   (clear [this] (.clear bitset))
-  (size [this] (long (/ m 8))))
+  (size [this] (long (/ m 8)))
+  (get-bitset [this] bitset))
 
 
 (defn get-bit-pos

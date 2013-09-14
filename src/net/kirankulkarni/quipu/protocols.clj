@@ -80,10 +80,3 @@
   IByteArray
   (to-byte-array [ba]
     ba))
-
-
-(defprotocol IProbCountingSet
-  (add [this elem])
-  (get-card [this])
-  (clear [this])
-  (size [this]))
