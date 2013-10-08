@@ -29,3 +29,13 @@
   [x0 y0 x1 y1 x]
   (long (Math/ceil
          (+ y0 (* (- y1 y0) (/ (- x x0) (- x1 x0)))))))
+
+
+
+(defn square [x] (* x x))
+
+(defn log2 [x] (/ (Math/log x) (Math/log 2)))
+
+(defn pow2 [x] (Math/pow 2 x))
+
+(defn >>> [v bits] (bit-shift-right (bit-and 0xFFFFFFFF v) bits))
