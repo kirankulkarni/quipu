@@ -63,6 +63,15 @@
                0.3969914 0.3970016 0.3970066 0.3970084 0.3970086 0.3969941 0.3969818
                0.3969567 0.3980263 0.4001740 0.4090892]]
   (defn get-loglog-counter
+    "A function to get a loglog counter,
+     which can be later used to count unique items.
+     n - Expected number of unique items.
+         To be safe you can use total number of elements
+         e.g. 10000000
+     expected-error - You can fine tune loglog by providing error from
+                      0.0001 - 0.9 i.e 0.01% to 90%
+                      The bigger error you chose more space you save.
+                      Usually 4% i.e. 0.04 is used with loglog counters."
     [n expected-error]
     (let [m-given (qu/square (/ 1.30 expected-error))
           m (find-closest m-given m-in-pow2)
