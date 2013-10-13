@@ -9,14 +9,14 @@
 
 
 
-(declare add-elem get-cardinality)
+(declare add-elem get-cardinality get-size)
 
 (deftype LogLogCounter
     [^:unsynchronized-mutable bitarray n m k alpham]
     IProbCountingSet
   (add [this elem] (add-elem bitarray k elem))
   (get-card [this] (get-cardinality bitarray m alpham))
-  (size [this] m))
+  (size [this] (get-size m k)))
 
 
 (defn- ^:inline add-elem
@@ -36,6 +36,14 @@
   [bytearray m alpham]
   (let [avg (/ (reduce + bytearray) m)]
     (* alpham m (qu/pow2 avg))))
+
+
+(defn- get-size
+  [m k]
+  (let [max-rank (- Integer/SIZE k)
+        string-rep (Integer/toString max-rank 2)]
+    (long (/ (* m (count string-rep))
+             8))))
 
 
 (defn find-closest
