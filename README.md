@@ -3,7 +3,11 @@
 A Clojure library which implements a bunch of Probabilistic data structures to count cardinality of a set. Most common use of this kind of structure is to find out "unique visitors".
 
 ## Installation
-TBD
+For Leiningen project use
+
+```clojure
+[net.kirankulkarni/quipu "0.1.0"]
+```
 
 ## Counting Methods
    Currently this library supports two counting methods Linear
