@@ -137,7 +137,7 @@
         (qu/lerp x0 y0 x1 y1 n))))
 
 
-(defn get-mem-linear-counter
+(defn get-linear-counter
   "Returns a Memory backed Linear counter.
    You should provide true-cardinality.
    If you do not know true cardinality
@@ -148,7 +148,7 @@
     (LinearCounter. bitset n m)))
 
 
-(defn merge-mem-counters
+(defn merge-counters
   "Count is identified by cardinality of bitset.
    Algorithm already handles collisions hence we can just merge counters using bitwise-or"
   [& counters]
