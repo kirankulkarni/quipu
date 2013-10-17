@@ -74,9 +74,11 @@ As we see it returned 10009 as estimated cardinality. It used 640 bytes i.e. 0.6
 I calculated number of unique words from [The Complete Work of Shakespeare](http://www.gutenberg.org/ebooks/100.txt.utf-8)
 It has total `1,410,671` words (including duplicates). I created linear and logical counter using this number, and for loglog counting I am using 4% error. Here are the results of the same
 
+Actual count of unique words is : `59,724`
+
 <table>
     <tr>
-    <th>Method</th><th>Count</th><th>Bytes Used</th>
+    <th>Method</th><th>Estimated Count</th><th>Bytes Used</th>
     </tr>
     <tr>
     <td>Clojure Set</td><td>59,724</td><td>5,421,192 ~ 5MB</td>
