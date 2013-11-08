@@ -18,8 +18,8 @@
 (defn ^Long  unsigned-murmurhash-32
   "In most places in this project we need unsigned hash-code.
    Note that this returns a `Long` number."
-  [o]
-  (bit-and (long (murmurhash-32 o))
+  [o & {:keys [seed] :or {seed 0}}]
+  (bit-and (long (murmurhash-32 o :seed seed))
            (long 0xFFFFFFFF)))
 
 
