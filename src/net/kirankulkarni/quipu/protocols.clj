@@ -7,6 +7,12 @@
   (to-byte-array [this]))
 
 
+(defn- get-bytes-from-str
+  [o]
+  (let [^String x (binding [*print-dup* false] (pr-str o))]
+    (.getBytes x "utf-8")))
+
+
 (extend-protocol IByteArray
   nil
   (to-byte-array [x] (byte-array 0))
@@ -36,23 +42,16 @@
   (to-byte-array [k] (.getBytes (name k) "utf-8"))
 
   clojure.lang.IPersistentList
-  (to-byte-array [l] (.getBytes (binding [*print-dup* false]
-                                  (pr-str l))
-                                "utf-8"))
+  (to-byte-array [l] (get-bytes-from-str l))
 
   clojure.lang.APersistentVector
-  (to-byte-array [v] (.getBytes (binding [*print-dup* false]
-                                  (pr-str v))
-                                "utf-8"))
+  (to-byte-array [v] (get-bytes-from-str v))
+
   clojure.lang.APersistentMap
-  (to-byte-array [m] (.getBytes (binding [*print-dup* false]
-                                  (pr-str m))
-                                "utf-8"))
+  (to-byte-array [m] (get-bytes-from-str m))
 
   clojure.lang.APersistentSet
-  (to-byte-array [s] (.getBytes (binding [*print-dup* false]
-                                  (pr-str s))
-                                "utf-8")))
+  (to-byte-array [s] (get-bytes-from-str s)))
 
 
 ;; Anyone will wonder why this has been kept seperate?

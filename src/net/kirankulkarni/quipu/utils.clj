@@ -10,7 +10,7 @@
   [o & {:keys [seed] :or {seed 0}}]
   (.. (Hashing/murmur3_32 (mod seed Integer/MAX_VALUE))
       newHasher
-      (putBytes (to-byte-array o))
+      (putBytes ^"[B" (to-byte-array o))
       hash
       hashCode))
 
