@@ -14,7 +14,7 @@ For Leiningen project use
    Counting and LogLog Counting.
 
 ### Linear Counting
-As the name suggests space required for this algorithm is linearly proportional to actual cardinality. It gives cardianlity with 1% error at most.
+As the name suggests space required for this algorithm is linearly proportional to actual cardinality. It gives cardinality with 1% error at most.
 
 Please refer the original paper:
 [Kyu-Young Whang , Brad T. Vander-Zanden , Howard M. Taylor, A linear-time probabilistic counting algorithm for database applications, ACM Transactions on Database Systems (TODS), v.15 n.2, p.208-229, June 1990](http://dl.acm.org/citation.cfm?id=78925&CFID=359353900&CFTOKEN=83197792)
